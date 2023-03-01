@@ -16,11 +16,12 @@ public class WhiteboardMarker : MonoBehaviour
     private Vector2 _touchPos,_lastTouchPos;
     private bool _touchLastFrame;
     private Quaternion _lastTouchRot;
+    
     // Start is called before the first frame update
     void Start()
     {
         _renderer = _tip.GetComponent<Renderer>();
-        _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
+        _colors = Enumerable.Repeat(Color.blue, _penSize * _penSize).ToArray();
         _tipHeight = _tip.localScale.y;
     }
 
@@ -32,7 +33,7 @@ public class WhiteboardMarker : MonoBehaviour
 
     private void Draw()
     {
-        if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
+        if (Physics.Raycast(_tip.position, transform.up, out _touch, 5))
         {
             if (_touch.transform.CompareTag("Whiteboard"))
             {
